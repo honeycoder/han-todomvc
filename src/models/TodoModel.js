@@ -4,11 +4,13 @@ export default class TodoModel {
 	store;
 	id;
 	@observable title;
+	@observable tag = []; //array to contain tags
 	@observable completed;
 
-	constructor(store, id, title, completed) {
+	constructor(store, id, tag, title, completed) {
 		this.store = store;
 		this.id = id;
+		this.tag = [tag];
 		this.title = title;
 		this.completed = completed;
 	}
@@ -20,20 +22,33 @@ export default class TodoModel {
 	destroy() {
 		this.store.todos.remove(this);
 	}
+	
+	deleteTag() { //deletes all tags in tag
+		this.tag = [];
+	}
 
 	setTitle(title) {
 		this.title = title;
+	}
+	
+	addTag(tag) { //add a tag
+		tag = tag.toUpperCase(); //capitalizes all letters in tag to prevent duplicates, also would like nicer given the proper style
+		if (this.tag.includes(tag) == false) {
+			this.tag.push(tag);
+			this.tag.push(" ");
+		}
 	}
 
 	toJS() {
 		return {
 			id: this.id,
+			tag: this.tag,
 			title: this.title,
 			completed: this.completed
 		};
 	}
 
 	static fromJS(store, object) {
-		return new TodoModel(store, object.id, object.title, object.completed);
+		return new TodoModel(store, object.id, object.tag, object.title, object.completed);
 	}
 }
