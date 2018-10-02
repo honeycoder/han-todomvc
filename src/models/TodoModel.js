@@ -24,7 +24,15 @@ export default class TodoModel {
 	}
 	
 	deleteTag() { //deletes all tags in tag
-		this.tag = [];
+		//var newTag = [];
+		this.tag.pop();
+		//if (this.tag[index] != undefined) {
+		//	this.tag.splice(index, 1);
+			//newTag = this.tag.slice(0, index).concat(this.tag.slice(index + 1, this.tag.length));
+		//}
+		//this.tag = newTag;
+		//this.tag[index] = undefined;
+		//this.tag = [];
 	}
 
 	setTitle(title) {
@@ -34,8 +42,7 @@ export default class TodoModel {
 	addTag(tag) { //add a tag
 		tag = tag.toUpperCase(); //capitalizes all letters in tag to prevent duplicates, also would like nicer given the proper style
 		if (this.tag.includes(tag) == false) {
-			this.tag.push(tag);
-			this.tag.push(" ");
+			this.tag.push(tag + " ");
 		}
 	}
 

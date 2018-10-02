@@ -11,6 +11,7 @@ const ENTER_KEY = 13;
 export default class TodoItem extends React.Component {
 	@observable editText = "";
 	@observable editTag = ""; //initializing string for tag
+	@observable tagButtons = "";
 
 	render() {
 		const {viewStore, todo} = this.props;
@@ -28,9 +29,9 @@ export default class TodoItem extends React.Component {
 					/>
 					<label onDoubleClick={this.handleEdit}>
 						{todo.title}<br />
-						{todo.tag}
+							<button type="button" onClick = {this.handleDeleteTag}>{todo.tag}</button>
 					</label>
-					<button className="destroy" onClick={this.handleDeleteTag} />	{/*can only delete todo after delete tags first*/}
+					<button className="destroy" onClick={this.handleDestroy} />	{/*can only delete todo after delete tags first*/}
 				</div>
 				<input
 					ref="editField"
@@ -50,11 +51,25 @@ export default class TodoItem extends React.Component {
 					onChange={this.handleChangeTag}
 					onKeyDown={this.handleKeyDownTag} 
 				/>
-				<button type="button" onClick={this.handleDeleteTag} />
 			</li>
 		);
 	}
-
+	
+	//handleTags = () => {
+	//	var wrapper = document.getElementById("htmlWrapper");
+	//	var myHTML = "";
+	//	var tagLength = this.props.todo.tag.length;
+	//	var tagName = "";
+	//	for (var i = 0; i < tagLength; i++) {
+	//		if (this.props.todo.tag[i] != undefined){
+	//			tagName = this.props.todo.tag[i];
+	//			myHTML += "<button type=" + '"reset"' + " onClick={this.parentNode.removeChild(this)}>" + tagName + "&nbsp</button>";
+	//		}
+	//	}
+	//	wrapper.innerHTML = myHTML;
+	//};
+		
+	
 	handleSubmit = (event) => {
 		const val = this.editText.trim();
 		if (val) {
@@ -82,11 +97,7 @@ export default class TodoItem extends React.Component {
 	};
 	
 	handleDeleteTag = () => { //can only delete todos after first deleting tag, button must be clicked twice
-		if (this.props.todo.tag.length == 0){
-			this.handleDestroy();
-		}else{
-			this.props.todo.deleteTag();
-		}
+		this.props.todo.deleteTag();
 	};
 
 	handleEdit = () => {
