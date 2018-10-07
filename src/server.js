@@ -42,7 +42,7 @@ const renderFullPage = html => {
 			<script src="/static/bundle.js"></script>
 			<footer class="info">
 				<p>Double-click to edit a todo</p>
-				<p>Click the x once to delete any available tags, then again to delete the todo</p>
+				<p>Click on an existing tag to delete</p>
 				<p>TodoMVC powered by React and <a href="http://github.com/mobxjs/mobx/">MobX</a>. Created by <a href="http://github.com/mweststrate/">mweststrate</a></p>
 				<p>Based on the base React TodoMVC by <a href="http://github.com/petehunt/">petehunt</a></p>
 				<p>Part of <a href="http://todomvc.com">ToDoMVC</a></p>

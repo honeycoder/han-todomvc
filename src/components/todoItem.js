@@ -29,7 +29,18 @@ export default class TodoItem extends React.Component {
 					/>
 					<label onDoubleClick={this.handleEdit}>
 						{todo.title}<br />
-							<button type="button" onClick = {this.handleDeleteTag}>{todo.tag}</button>
+						<button type="button" onClick={() => this.tagDelete(1)}>{todo.tag[1]}&nbsp;</button>
+						<button type="button" onClick={() => this.tagDelete(2)}>{todo.tag[2]}&nbsp;</button>
+						<button type="button" onClick={() => this.tagDelete(3)}>{todo.tag[3]}&nbsp;</button>
+						<button type="button" onClick={() => this.tagDelete(4)}>{todo.tag[4]}&nbsp;</button>
+						<button type="button" onClick={() => this.tagDelete(5)}>{todo.tag[5]}&nbsp;</button>
+						<button type="button" onClick={() => this.tagDelete(6)}>{todo.tag[6]}&nbsp;</button>
+						<button type="button" onClick={() => this.tagDelete(7)}>{todo.tag[7]}&nbsp;</button>
+						<button type="button" onClick={() => this.tagDelete(8)}>{todo.tag[8]}&nbsp;</button>
+						<button type="button" onClick={() => this.tagDelete(9)}>{todo.tag[9]}&nbsp;</button>
+						<button type="button" onClick={() => this.tagDelete(10)}>{todo.tag[10]}&nbsp;</button>
+						<button type="button" onClick={() => this.tagDelete(11)}>{todo.tag[11]}&nbsp;</button>
+						<button type="button" onClick={() => this.tagDelete(12)}>{todo.tag[12]}&nbsp;</button>
 					</label>
 					<button className="destroy" onClick={this.handleDestroy} />	{/*can only delete todo after delete tags first*/}
 				</div>
@@ -55,19 +66,26 @@ export default class TodoItem extends React.Component {
 		);
 	}
 	
-	//handleTags = () => {
-	//	var wrapper = document.getElementById("htmlWrapper");
-	//	var myHTML = "";
-	//	var tagLength = this.props.todo.tag.length;
-	//	var tagName = "";
-	//	for (var i = 0; i < tagLength; i++) {
-	//		if (this.props.todo.tag[i] != undefined){
-	//			tagName = this.props.todo.tag[i];
-	//			myHTML += "<button type=" + '"reset"' + " onClick={this.parentNode.removeChild(this)}>" + tagName + "&nbsp</button>";
-	//		}
-	//	}
-	//	wrapper.innerHTML = myHTML;
-	//};
+	tagDelete(index) {
+		const todo = this.props.todo;
+		this.props.viewStore.todoBeingEdited = todo;
+		this.props.todo.deleteTag(index);
+		this.props.viewStore.todoBeingEdited = null;
+	}
+	
+	handleTags = () => {
+		var wrapper = document.getElementById("htmlWrapper");
+		var myHTML = "";
+		var tagLength = this.props.todo.tag.length;
+		var tagName = "";
+		for (var i = 0; i < tagLength; i++) {
+			if (this.props.todo.tag[i] != undefined){
+				tagName = this.props.todo.tag[i];
+				myHTML += "<button type=" + '"button"' + " onClick={() => this.tagDelete(" + i + ")}>" + tagName + "&nbsp;</button>";
+			}
+		}
+		wrapper.innerHTML = myHTML;
+	};
 		
 	
 	handleSubmit = (event) => {
@@ -89,6 +107,7 @@ export default class TodoItem extends React.Component {
 		} 
 		this.props.viewStore.todoBeingEdited = null;
 		document.getElementById("tag-id").value='';//empties textfield once submitted
+		//this.handleTags();
 	};
 
 	handleDestroy = () => {
@@ -97,7 +116,8 @@ export default class TodoItem extends React.Component {
 	};
 	
 	handleDeleteTag = () => { //can only delete todos after first deleting tag, button must be clicked twice
-		this.props.todo.deleteTag();
+		this.props.todo.deleteTag(1);
+		console.log("deletedbeleted");
 	};
 
 	handleEdit = () => {

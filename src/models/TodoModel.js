@@ -23,13 +23,13 @@ export default class TodoModel {
 		this.store.todos.remove(this);
 	}
 	
-	deleteTag() { //deletes all tags in tag
-		//var newTag = [];
-		this.tag.pop();
-		//if (this.tag[index] != undefined) {
-		//	this.tag.splice(index, 1);
+	deleteTag(index) { //deletes all tags in tag
+		var newTag = [];
+		//this.tag.pop();
+		if (this.tag[index] != undefined) {
+			this.tag.splice(index, 1);
 			//newTag = this.tag.slice(0, index).concat(this.tag.slice(index + 1, this.tag.length));
-		//}
+		}
 		//this.tag = newTag;
 		//this.tag[index] = undefined;
 		//this.tag = [];
@@ -42,7 +42,7 @@ export default class TodoModel {
 	addTag(tag) { //add a tag
 		tag = tag.toUpperCase(); //capitalizes all letters in tag to prevent duplicates, also would like nicer given the proper style
 		if (this.tag.includes(tag) == false) {
-			this.tag.push(tag + " ");
+			this.tag.push(tag);
 		}
 	}
 
